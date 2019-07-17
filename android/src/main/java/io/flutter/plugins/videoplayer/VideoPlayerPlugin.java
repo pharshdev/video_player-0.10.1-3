@@ -117,10 +117,16 @@ public class VideoPlayerPlugin implements MethodCallHandler {
 
       MediaSource mediaSource = buildMediaSource(uri, dataSourceFactory, context);
       if (subtitleSource != null && !subtitleSource.equals("") ) {
+//         Format format = Format.createTextSampleFormat(
+//                 null,
+//                 MimeTypes.TEXT_VTT,
+//                 Format.NO_VALUE,
+//                 null);
+        // For srt
         Format format = Format.createTextSampleFormat(
-                null,
-                MimeTypes.TEXT_VTT,
-                Format.NO_VALUE,
+                null, 
+                MimeTypes.APPLICATION_SUBRIP,
+                Format.NO_VALUE, 
                 null);
 
         MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource),
