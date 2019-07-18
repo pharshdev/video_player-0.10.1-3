@@ -102,18 +102,18 @@ public class VideoPlayerPlugin implements MethodCallHandler {
 
       Uri uri = Uri.parse(dataSource);
 
-      DataSource.Factory dataSourceFactory;
-      if (isFileOrAsset(uri)) {
+      DefaultDataSource.Factory dataSourceFactory;
+      //if (isFileOrAsset(uri)) {
         dataSourceFactory = new DefaultDataSourceFactory(context, "ExoPlayer");
-      } else {
-        dataSourceFactory =
-                new DefaultHttpDataSourceFactory(
-                        "ExoPlayer",
-                        null,
-                        DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS,
-                        DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS,
-                        true);
-      }
+      //} else {
+      //  dataSourceFactory =
+      //          new DefaultHttpDataSourceFactory(
+      //                  "ExoPlayer",
+      //                  null,
+      //                  DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS,
+      //                  DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS,
+      //                  true);
+      //}
 
       MediaSource mediaSource = buildMediaSource(uri, dataSourceFactory, context);
       if (subtitleSource != null && !subtitleSource.equals("") ) {
@@ -133,7 +133,7 @@ public class VideoPlayerPlugin implements MethodCallHandler {
         //        dataSourceFactory, format, C.TIME_UNSET);
         
         // Subtitles will be taken from device
-        MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource), new DefaultDataSourceFactory(context, "ExoPlayer"),
+        MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource), dataSourceFactory,
                         format,
                         C.TIME_UNSET);
         
@@ -168,7 +168,7 @@ public class VideoPlayerPlugin implements MethodCallHandler {
     }
 
     private MediaSource buildMediaSource(
-            Uri uri, DataSource.Factory mediaDataSourceFactory, Context context) {
+            Uri uri, DefaultDataSource.Factory mediaDataSourceFactory, Context context) {
       int type = Util.inferContentType(uri.getLastPathSegment());
       switch (type) {
         case C.TYPE_SS:
