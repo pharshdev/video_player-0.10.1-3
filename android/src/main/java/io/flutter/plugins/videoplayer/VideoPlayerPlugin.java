@@ -129,8 +129,14 @@ public class VideoPlayerPlugin implements MethodCallHandler {
                 Format.NO_VALUE, 
                 null);
 
-        MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource),
-                dataSourceFactory, format, C.TIME_UNSET);
+        // MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource),
+        //        dataSourceFactory, format, C.TIME_UNSET);
+        
+        // Subtitles will be taken from device
+        MediaSource subtitleSourceEng = new SingleSampleMediaSource(Uri.parse(subtitleSource), new DefaultDataSourceFactory(context, "ExoPlayer"),
+                        format,
+                        C.TIME_UNSET);
+        
         mediaSource = new MergingMediaSource(mediaSource, subtitleSourceEng);
       }
       exoPlayer.prepare(mediaSource);
