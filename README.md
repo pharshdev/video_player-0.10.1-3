@@ -1,8 +1,8 @@
-# Video player plugin edited to fetch subtitles from HLS stream and load VTT from url.
+# Video player plugin edited to fetch subtitles from HLS stream and load SRT from url.
 
 # video_player-0.10.1-3
 
-Works with https://github.com/snaeji/chewie-0.9.7 for displaying CC button and subtitles
+Works with https://github.com/pharshdev/chewie-0.9.7 for displaying CC button and subtitles
 
 # Video Player plugin for Flutter
 
